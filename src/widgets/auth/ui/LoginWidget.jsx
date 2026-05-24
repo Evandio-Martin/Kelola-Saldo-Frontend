@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { LoginForm } from "@/features/auth";
-import { isMockAuthEnabled, mockAuthPreview } from "@/entities/auth";
+import { mockAuthPreview } from "@/entities/auth";
 import { useLanguage } from "@/shared/hooks";
 import { Seo } from "@/shared/ui/Seo";
 import { AuthShell } from "./AuthShell";
