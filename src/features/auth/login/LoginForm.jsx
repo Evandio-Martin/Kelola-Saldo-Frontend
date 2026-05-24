@@ -84,6 +84,28 @@ const LoginForm = () => {
         />
       </div>
 
+      <div className="opacity-0 pointer-events-none">
+        <label className="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+          &nbsp;
+        </label>
+        <input
+          type="text"
+          disabled
+          className="w-full rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm dark:border-neutral-800 dark:bg-neutral-900"
+        />
+      </div>
+
+      <div className="opacity-0 pointer-events-none">
+        <label className="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+          &nbsp;
+        </label>
+        <input
+          type="text"
+          disabled
+          className="w-full rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm dark:border-neutral-800 dark:bg-neutral-900"
+        />
+      </div>
+
       {error && (
         <p className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-600 dark:border-rose-900/60 dark:bg-rose-950/30 dark:text-rose-300">
           {error}

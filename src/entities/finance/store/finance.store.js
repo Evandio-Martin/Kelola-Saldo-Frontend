@@ -10,9 +10,10 @@ import { readStoredLanguage } from "@/shared/hooks";
 const FINANCE_STORAGE_KEY = "money-tracker-finance";
 const LEGACY_FINANCE_STORAGE_KEY = FINANCE_STORAGE_KEY;
 const LEGACY_TRANSACTIONS_STORAGE_KEY = "money-tracker-transactions";
-const FALLBACK_CATEGORY = "Lain-lain";
-const FALLBACK_ACCOUNT = "Tunai";
+const FALLBACK_CATEGORY = "Other";
+const FALLBACK_ACCOUNT = "Cash";
 const GUEST_FINANCE_SCOPE = "guest";
+const DEMO_FINANCE_SCOPE = "mock-user-demo";
 const isRemoteFinanceEnabled = Boolean(import.meta.env.VITE_API_BASE_URL) && !isMockAuthEnabled;
 
 const getActiveFinanceScope = () => {
@@ -29,142 +30,142 @@ const seedTransactions = [
   {
     id: "txn-001",
     date: "2026-05-01",
-    description: "Gaji Bulanan",
-    category: "Gaji",
-    account: "Rekening Utama",
+    description: "Monthly Salary",
+    category: "Salary",
+    account: "Main Wallet",
     type: "income",
     amount: 8500000,
   },
   {
     id: "txn-002",
     date: "2026-05-02",
-    description: "Sewa Kontrakan",
-    category: "Tempat Tinggal",
-    account: "Rekening Utama",
+    description: "Rent",
+    category: "Housing",
+    account: "Main Wallet",
     type: "expense",
     amount: 2400000,
   },
   {
     id: "txn-003",
     date: "2026-05-03",
-    description: "Belanja Bulanan",
-    category: "Makanan",
-    account: "Rekening Utama",
+    description: "Groceries",
+    category: "Food",
+    account: "Main Wallet",
     type: "expense",
     amount: 685000,
   },
   {
     id: "txn-004",
     date: "2026-05-04",
-    description: "Proyek Landing Page",
-    category: "Pekerjaan Sampingan",
-    account: "Dana Tabungan",
+    description: "Landing Page Project",
+    category: "Freelance",
+    account: "Savings Vault",
     type: "income",
     amount: 2250000,
   },
   {
     id: "txn-005",
     date: "2026-05-05",
-    description: "Tagihan Listrik",
-    category: "Tagihan",
-    account: "Rekening Utama",
+    description: "Electricity Bill",
+    category: "Utilities",
+    account: "Main Wallet",
     type: "expense",
     amount: 315000,
   },
   {
     id: "txn-006",
     date: "2026-05-06",
-    description: "Isi Bensin",
-    category: "Transportasi",
-    account: "Rekening Utama",
+    description: "Fuel",
+    category: "Transport",
+    account: "Main Wallet",
     type: "expense",
     amount: 180000,
   },
   {
     id: "txn-007",
     date: "2026-05-08",
-    description: "Transfer Dana Darurat",
-    category: "Tabungan",
-    account: "Dana Tabungan",
+    description: "Emergency Fund Transfer",
+    category: "Savings",
+    account: "Savings Vault",
     type: "expense",
     amount: 1000000,
   },
   {
     id: "txn-008",
     date: "2026-05-10",
-    description: "Kopi dan Camilan",
-    category: "Makanan",
-    account: "Rekening Utama",
+    description: "Coffee and Snacks",
+    category: "Food",
+    account: "Main Wallet",
     type: "expense",
     amount: 45000,
   },
   {
     id: "txn-009",
     date: "2026-05-12",
-    description: "Langganan Streaming",
-    category: "Hiburan",
-    account: "Rekening Utama",
+    description: "Streaming Subscriptions",
+    category: "Entertainment",
+    account: "Main Wallet",
     type: "expense",
     amount: 129000,
   },
   {
     id: "txn-010",
     date: "2026-04-29",
-    description: "Gaji Bulanan",
-    category: "Gaji",
-    account: "Rekening Utama",
+    description: "Monthly Salary",
+    category: "Salary",
+    account: "Main Wallet",
     type: "income",
     amount: 8350000,
   },
   {
     id: "txn-011",
     date: "2026-04-30",
-    description: "Belanja Bulanan",
-    category: "Makanan",
-    account: "Rekening Utama",
+    description: "Groceries",
+    category: "Food",
+    account: "Main Wallet",
     type: "expense",
     amount: 620000,
   },
   {
     id: "txn-012",
     date: "2026-04-24",
-    description: "Retainer Klien",
-    category: "Pekerjaan Sampingan",
-    account: "Dana Tabungan",
+    description: "Client Retainer",
+    category: "Freelance",
+    account: "Savings Vault",
     type: "income",
     amount: 1750000,
   },
 ];
 
 const CATEGORY_MIGRATIONS = {
-  Salary: "Gaji",
-  Housing: "Tempat Tinggal",
-  Food: "Makanan",
-  Freelance: "Pekerjaan Sampingan",
-  Utilities: "Tagihan",
-  Transport: "Transportasi",
-  Savings: "Tabungan",
-  Entertainment: "Hiburan",
+  "Gaji": "Salary",
+  "Tempat Tinggal": "Housing",
+  "Makanan": "Food",
+  "Pekerjaan Sampingan": "Freelance",
+  "Tagihan": "Utilities",
+  "Transportasi": "Transport",
+  "Tabungan": "Savings",
+  "Hiburan": "Entertainment",
   Uncategorized: FALLBACK_CATEGORY,
 };
 
 const ACCOUNT_MIGRATIONS = {
-  "Main Wallet": "Rekening Utama",
-  "Savings Vault": "Dana Tabungan",
-  "Cash Wallet": FALLBACK_ACCOUNT,
+  "Rekening Utama": "Main Wallet",
+  "Dana Tabungan": "Savings Vault",
+  "Tunai": FALLBACK_ACCOUNT,
 };
 
 const DESCRIPTION_MIGRATIONS = {
-  "Primary Salary": "Gaji Bulanan",
-  "Apartment Rent": "Sewa Kontrakan",
-  Groceries: "Belanja Bulanan",
-  "Freelance Landing Page": "Proyek Landing Page",
-  "Electricity Bill": "Tagihan Listrik",
-  Fuel: "Isi Bensin",
-  "Emergency Fund Transfer": "Transfer Dana Darurat",
-  "Coffee and Snacks": "Kopi dan Camilan",
-  "Streaming Subscriptions": "Langganan Streaming",
-  "Client Retainer": "Retainer Klien",
+  "Gaji Bulanan": "Monthly Salary",
+  "Sewa Kontrakan": "Rent",
+  "Belanja Bulanan": "Groceries",
+  "Proyek Landing Page": "Landing Page Project",
+  "Tagihan Listrik": "Electricity Bill",
+  "Isi Bensin": "Fuel",
+  "Transfer Dana Darurat": "Emergency Fund Transfer",
+  "Kopi dan Camilan": "Coffee and Snacks",
+  "Langganan Streaming": "Streaming Subscriptions",
+  "Retainer Klien": "Client Retainer",
 };
 
 const SEEDED_TRANSACTION_MIGRATIONS = Object.fromEntries(
@@ -197,15 +198,15 @@ const seedAccounts = createNamedItems(
 );
 
 const seedBudgets = [
-  { id: "budget-001", month: "2026-05", category: "Tempat Tinggal", limit: 2500000 },
-  { id: "budget-002", month: "2026-05", category: "Makanan", limit: 1200000 },
-  { id: "budget-003", month: "2026-05", category: "Transportasi", limit: 500000 },
-  { id: "budget-004", month: "2026-05", category: "Tagihan", limit: 700000 },
-  { id: "budget-005", month: "2026-05", category: "Hiburan", limit: 400000 },
-  { id: "budget-006", month: "2026-05", category: "Tabungan", limit: 1500000 },
-  { id: "budget-007", month: "2026-04", category: "Makanan", limit: 1100000 },
-  { id: "budget-008", month: "2026-04", category: "Tempat Tinggal", limit: 2500000 },
-  { id: "budget-009", month: "2026-04", category: "Transportasi", limit: 450000 },
+  { id: "budget-001", month: "2026-05", category: "Housing", limit: 2500000 },
+  { id: "budget-002", month: "2026-05", category: "Food", limit: 1200000 },
+  { id: "budget-003", month: "2026-05", category: "Transport", limit: 500000 },
+  { id: "budget-004", month: "2026-05", category: "Utilities", limit: 700000 },
+  { id: "budget-005", month: "2026-05", category: "Entertainment", limit: 400000 },
+  { id: "budget-006", month: "2026-05", category: "Savings", limit: 1500000 },
+  { id: "budget-007", month: "2026-04", category: "Food", limit: 1100000 },
+  { id: "budget-008", month: "2026-04", category: "Housing", limit: 2500000 },
+  { id: "budget-009", month: "2026-04", category: "Transport", limit: 450000 },
 ];
 
 const SEEDED_BUDGET_MIGRATIONS = Object.fromEntries(
@@ -446,7 +447,7 @@ const readLegacyTransactions = () => {
 
 const readFinanceState = () => {
   if (!hasBrowserStorage()) {
-    return seedFinanceState;
+    return persistFinanceState(getDefaultFinanceStateForScope(getActiveFinanceScope()));
   }
 
   const serializedState = window.localStorage.getItem(getFinanceStorageKey());
@@ -465,7 +466,7 @@ const readFinanceState = () => {
         return persistFinanceState(parsedState);
       }
     } catch {
-      return persistFinanceState(seedFinanceState);
+      return persistFinanceState(getDefaultFinanceStateForScope(getActiveFinanceScope()));
     }
   }
 
@@ -486,7 +487,7 @@ const readFinanceState = () => {
           return persistFinanceState(parsedLegacyState);
         }
       } catch {
-        return persistFinanceState(seedFinanceState);
+        return persistFinanceState(getDefaultFinanceStateForScope(getActiveFinanceScope()));
       }
     }
   }
@@ -508,7 +509,7 @@ const readFinanceState = () => {
     });
   }
 
-  return persistFinanceState(seedFinanceState);
+  return persistFinanceState(getDefaultFinanceStateForScope(getActiveFinanceScope()));
 };
 
 const updateFiltersAfterMutation = (filters, transactions, budgets, monthHint) => {
@@ -550,10 +551,25 @@ const renameInBudgets = (budgets, fromName, toName) =>
 
 const createEmptyFinanceState = () => ({
   transactions: [],
-  categories: [],
-  accounts: [],
+  categories: createNamedItems(
+    [
+      "Food",
+      "Social Life",
+      "Transport",
+      "Culture",
+      "Household",
+      "Apparel",
+      "Education",
+      FALLBACK_CATEGORY,
+    ],
+    "category",
+  ),
+  accounts: createNamedItems(["Cash", "Card"], "account"),
   budgets: [],
 });
+
+const getDefaultFinanceStateForScope = (scope) =>
+  scope === DEMO_FINANCE_SCOPE ? seedFinanceState : createEmptyFinanceState();
 
 const normalizeRemoteFinanceState = (state) => ({
   transactions: [...(state.transactions || [])].sort(

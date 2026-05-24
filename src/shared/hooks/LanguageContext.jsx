@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 const LanguageContext = createContext(null);
 
 const LANGUAGE_STORAGE_KEY = "app-language";
-const DEFAULT_LANGUAGE = "id";
-const SUPPORTED_LANGUAGES = ["id", "en"];
+const DEFAULT_LANGUAGE = "en";
+const SUPPORTED_LANGUAGES = ["en", "id"];
 
 export const readStoredLanguage = () => {
   if (typeof window === "undefined") {

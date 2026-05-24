@@ -17,8 +17,7 @@ export const LoginWidget = () => {
         title: "Sign in to your account",
         description:
           "Sign in to review balances, transactions, budgets, and monthly cash flow from one simple dashboard.",
-        demoPrefix: "Use the demo account",
-        demoSuffix: "or create a new account below.",
+        demoPrefix: "or use demo account",
         footerLead: "Don’t have an account?",
         footerLink: "Create one",
       }
@@ -30,8 +29,7 @@ export const LoginWidget = () => {
         title: "Masuk ke akun Anda",
         description:
           "Masuk untuk melihat ringkasan saldo, transaksi, anggaran, dan arus kas bulanan dalam satu dashboard sederhana.",
-        demoPrefix: "Gunakan akun demo",
-        demoSuffix: "atau buat akun baru di bawah.",
+        demoPrefix: "atau gunakan akun demo",
         footerLead: "Belum punya akun?",
         footerLink: "Daftar sekarang",
       };
@@ -45,23 +43,16 @@ export const LoginWidget = () => {
         noIndex
       />
       <AuthShell
-        eyebrow={copy.eyebrow}
         title={copy.title}
         description={copy.description}
-        cardNote={
-          isMockAuthEnabled ? (
-            <>
-              {copy.demoPrefix} <strong>{mockAuthPreview.username}</strong> /
-              <strong> {mockAuthPreview.password}</strong> {copy.demoSuffix}
-            </>
-          ) : null
-        }
         footer={
           <p>
             {copy.footerLead}{" "}
             <Link to="/register" className="font-semibold text-sky-700 dark:text-sky-300">
               {copy.footerLink}
             </Link>
+            {" "}{copy.demoPrefix} <strong>{mockAuthPreview.username}</strong> /{" "}
+            <strong>{mockAuthPreview.password}</strong>
           </p>
         }
       >

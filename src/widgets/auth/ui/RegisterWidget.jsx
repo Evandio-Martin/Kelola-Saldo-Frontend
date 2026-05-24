@@ -12,7 +12,6 @@ export const RegisterWidget = () => {
         seoTitle: "Create Account",
         seoDescription:
           "Create a KelolaSaldo account to start tracking income, expenses, and monthly budgets.",
-        eyebrow: "Create account",
         title: "Create a new account",
         description:
           "Create an account to start managing balances, budgets, and monthly financial reports.",
@@ -23,7 +22,6 @@ export const RegisterWidget = () => {
         seoTitle: "Daftar",
         seoDescription:
           "Buat akun KelolaSaldo untuk mulai mencatat pemasukan, pengeluaran, dan anggaran bulanan.",
-        eyebrow: "Daftar",
         title: "Buat akun baru",
         description:
           "Buat akun untuk mulai mengelola saldo, menyusun anggaran, dan meninjau laporan keuangan bulanan Anda.",
@@ -40,7 +38,6 @@ export const RegisterWidget = () => {
         noIndex
       />
       <AuthShell
-        eyebrow={copy.eyebrow}
         title={copy.title}
         description={copy.description}
         footer={

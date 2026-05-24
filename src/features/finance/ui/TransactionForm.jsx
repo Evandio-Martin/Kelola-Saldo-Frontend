@@ -108,6 +108,14 @@ export const TransactionForm = ({
   );
   const [validationMessage, setValidationMessage] = useState("");
 
+  const incomeCategoryOptions = [
+    "Allowance",
+    "Salary",
+    "Petty Cash",
+    "Bonus",
+    "Other",
+  ];
+
   useEffect(() => {
     setForm(formatTransactionFormValues(initialValues, language));
     setValidationMessage("");
@@ -118,10 +126,23 @@ export const TransactionForm = ({
     const nextValue =
       name === "amount" ? formatGroupedNumberInput(value, language) : value;
 
-    setForm((currentForm) => ({
-      ...currentForm,
-      [name]: nextValue,
-    }));
+    setForm((currentForm) => {
+      const nextForm = {
+        ...currentForm,
+        [name]: nextValue,
+      };
+
+      if (name === "type") {
+        const nextCategories =
+          nextValue === "income" ? incomeCategoryOptions : categoryOptions;
+
+        if (!nextCategories.includes(nextForm.category)) {
+          nextForm.category = "";
+        }
+      }
+
+      return nextForm;
+    });
 
     if (validationMessage) {
       setValidationMessage("");
@@ -219,9 +240,11 @@ export const TransactionForm = ({
               className="rounded-xl border border-neutral-300 bg-white px-4 py-2.5 text-sm text-neutral-900 outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
             />
             <datalist id="transaction-category-options">
-              {categoryOptions.map((category) => (
-                <option key={category} value={category} />
-              ))}
+              {(form.type === "income" ? incomeCategoryOptions : categoryOptions).map(
+                (category) => (
+                  <option key={category} value={category} />
+                ),
+              )}
             </datalist>
           </>
         </label>
