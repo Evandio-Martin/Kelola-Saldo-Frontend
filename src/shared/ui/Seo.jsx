@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet-async";
 
 const SITE_NAME = "KelolaSaldo";
-const BASE_URL = "https://react-startup-project.vercel.app";
+const BASE_URL = "https://kelola-saldo-frontend.vercel.app";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og_image.webp`;
 
 export const Seo = ({
