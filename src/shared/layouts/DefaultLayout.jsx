@@ -25,11 +25,8 @@ export const DefaultLayout = ({ children }) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (isMobileMenuOpen) {
-      const id = setTimeout(() => setIsMobileMenuOpen(false), 0);
-      return () => clearTimeout(id);
-    }
-  }, [pathname, isMobileMenuOpen]);
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   const handleLogout = async () => {
     await logout();
@@ -114,28 +111,44 @@ export const DefaultLayout = ({ children }) => {
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="mb-4 lg:mb-0">
-          <div className="flex items-start justify-between gap-4 lg:hidden">
-            <div>
-              <p className="text-xs font-semibold tracking-[0.3em] text-sky-600 uppercase dark:text-sky-300">
-                {copy.appLabel}
-              </p>
-              <h2 className="mt-1 text-xl font-bold">KelolaSaldo</h2>
-            </div>
-            <button
-              type="button"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-neutral-200 bg-white text-neutral-700 transition hover:bg-sky-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-sky-500/10"
-              aria-label="Close navigation"
-            >
-              ✕
-            </button>
-          </div>
-          <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
-            {copy.appDescription}
-          </p>
+        <div className="mb-4 flex items-center justify-end lg:hidden">
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-neutral-200 bg-white text-neutral-700 transition hover:bg-sky-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-sky-500/10"
+            aria-label="Close navigation"
+          >
+            ✕
+          </button>
         </div>
-        <nav>
+        <div className="mb-4 flex items-center justify-between lg:hidden">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.3em] text-sky-600 uppercase dark:text-sky-300">
+              {copy.appLabel}
+            </p>
+            <h2 className="mt-1 text-xl font-bold">KelolaSaldo</h2>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-neutral-200 bg-white text-neutral-700 transition hover:bg-sky-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-sky-500/10"
+            aria-label="Close navigation"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div>
+          <div className="mb-4 lg:mb-0">
+            <p className="text-xs font-semibold tracking-[0.3em] text-sky-600 uppercase dark:text-sky-300">
+              {copy.appLabel}
+            </p>
+            <h2 className="mt-1 text-xl font-bold">KelolaSaldo</h2>
+            <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+              {copy.appDescription}
+            </p>
+          </div>
+          <nav>
             <ul className="space-y-1">
               {copy.navigationItems.map((item) => (
                 <li key={item.to}>
@@ -168,6 +181,7 @@ export const DefaultLayout = ({ children }) => {
               <p className="text-xs text-neutral-500">{roleLabel}</p>
             </div>
           )}
+        </div>
         <div className="mt-6 flex flex-col gap-2">
           <div className="rounded-lg border border-sky-200 bg-sky-50 p-3 dark:border-sky-400/20 dark:bg-sky-500/10">
             <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-sky-800 dark:text-sky-100">
