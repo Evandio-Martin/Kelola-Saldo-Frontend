@@ -111,16 +111,6 @@ export const DefaultLayout = ({ children }) => {
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="mb-4 flex items-center justify-end lg:hidden">
-          <button
-            type="button"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-neutral-200 bg-white text-neutral-700 transition hover:bg-sky-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-sky-500/10"
-            aria-label="Close navigation"
-          >
-            ✕
-          </button>
-        </div>
         <div className="mb-4 flex items-center justify-between lg:hidden">
           <div>
             <p className="text-xs font-semibold tracking-[0.3em] text-sky-600 uppercase dark:text-sky-300">
@@ -175,9 +165,7 @@ export const DefaultLayout = ({ children }) => {
           {user && (
             <div className="space-y-1">
               <p className="font-semibold">{user.name}</p>
-              <p className="text-neutral-600 dark:text-neutral-400">
-                @{user.username}
-              </p>
+              <p className="text-neutral-600 dark:text-neutral-400">@{user.username}</p>
               <p className="text-xs text-neutral-500">{roleLabel}</p>
             </div>
           )}
