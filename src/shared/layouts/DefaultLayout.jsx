@@ -111,13 +111,7 @@ export const DefaultLayout = ({ children }) => {
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="mb-4 flex items-center justify-between lg:hidden">
-          <div>
-            <p className="text-xs font-semibold tracking-[0.3em] text-sky-600 uppercase dark:text-sky-300">
-              {copy.appLabel}
-            </p>
-            <h2 className="mt-1 text-xl font-bold">KelolaSaldo</h2>
-          </div>
+        <div className="mb-4 flex items-center justify-end lg:hidden">
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(false)}
@@ -127,7 +121,6 @@ export const DefaultLayout = ({ children }) => {
             ✕
           </button>
         </div>
-
         <div>
           <div className="mb-4 lg:mb-0">
             <p className="text-xs font-semibold tracking-[0.3em] text-sky-600 uppercase dark:text-sky-300">
